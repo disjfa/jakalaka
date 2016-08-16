@@ -1,0 +1,14 @@
+services:
+  glynn_admin.menu_builder:
+    class: GlyynnAdminBundle\Menu\MainBuilder
+    arguments:
+      - '@service_container'
+      - '@knp_menu.factory'
+      - '@knp_menu.matcher'
+    tags:
+      - { name: 'knp_menu.menu_builder', method: 'build', alias: 'glynn-admin' }
+
+  glynn_admin.configure_menu_listener:
+        class: GlyynnAdminBundle\Menu\ConfigureMenuListener
+        tags:
+          - { name: 'kernel.event_listener', event: 'glynn_admin.menu_configure', method: 'onMenuConfigure' }

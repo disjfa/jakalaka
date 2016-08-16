@@ -1,3 +1,12 @@
-app:
-    resource: "@AppBundle/Controller/"
+user:
+    resource: "@UserBundle/Controller/"
     type:     annotation
+    prefix:   /
+
+glyynn_admin:
+    resource: "@GlyynnAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

@@ -1,0 +1,22 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="col-sm-6 push-sm-3">
+        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        <div class="card bg-faded">
+            <div class="card-header bg-primary">
+                <i class="fa fa-user"></i>
+                Register
+            </div>
+            <div class="card-block">
+                {{ form_widget(form) }}
+
+                <button type="submit" class="btn btn-primary pull-left">
+                    <i class="fa fa-sign-in"></i>
+                    {{ 'registration.submit'|trans }}
+                </button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
