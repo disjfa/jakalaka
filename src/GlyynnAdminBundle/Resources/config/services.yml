@@ -12,3 +12,9 @@ services:
         class: GlyynnAdminBundle\Menu\ConfigureMenuListener
         tags:
           - { name: 'kernel.event_listener', event: 'glynn_admin.menu_configure', method: 'onMenuConfigure' }
+
+  glynn_admin.dashboard_item_listener:
+        class: GlyynnAdminBundle\Dashboard\DashboardExample
+        tags:
+          - { name: 'kernel.event_listener', event: 'glynn_admin.dashboard_items', method: 'get' }
+

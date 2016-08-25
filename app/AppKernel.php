@@ -15,10 +15,12 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new GlyynnAdminBundle\GlyynnAdminBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
+
+            new GlyynnAdminBundle\GlyynnAdminBundle(),
             new UserBundle\UserBundle(),
         ];
 

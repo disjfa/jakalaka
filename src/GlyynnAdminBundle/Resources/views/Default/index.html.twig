@@ -1,7 +1,10 @@
 {% extends ":glynn-admin:base.html.twig" %}
 
 {% block body %}
-    <h1>Hello world</h1>
-
+    <h1>Hello glynn admin</h1>
+    <hr>
+    {% for item in dashboardItems.items %}
+        {{ item | raw }}
+    {% endfor %}
 {% endblock %}
 

@@ -5,7 +5,7 @@ parameters:
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     symfony
-    database_user:~
+    database_user: ~
     database_password: ~
     database_driver: pdo_sqlite
     database_path: "%kernel.root_dir%/glynn-admin.db3"
