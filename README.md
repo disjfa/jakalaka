@@ -1,16 +1,16 @@
-glynn-admin-symfony
+Glynn-admin-symfony
 ===================
 
 Symfony implementation for the [glynn-admin](https://github.com/disjfa/glynn-admin) template.
 
-# instalation
+# Instalation
 
 ```
 git clone git@github.com:disjfa/glynn-admin-symfony.git
 composer install
 ```
 
-#setup the easy way
+# Setup the easy way
 The base package uses a sqlite database, located in ```%kernel.root_dir%/glynn-admin.db3```.
 So the easy way, on the commandline:
 ```
