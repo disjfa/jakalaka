@@ -1,0 +1,18 @@
+{% extends ":glynn-admin:base.html.twig" %}
+
+{% block title %}
+    Builder - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for builder in builders %}
+        <h3>
+            <a href="{{ path('disjfa_builder_builder_show', {'builder': builder.id}) }}">
+                {{ builder.name }}
+            </a>
+        </h3>
+        Created by: {{ builder.author.username }}
+    {% endfor %}
+    {{ dump(builders) }}
+{% endblock %}
+

@@ -1,0 +1,34 @@
+{% extends "bootstrap_3_layout.html.twig" %}
+
+{% block form_errors -%}
+    {% if errors|length > 0 -%}
+        {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
+
+        {%- for error in errors -%}
+            <div class="form-control-feedback">
+                <i class="fa fa-exclamation-triangle"></i>
+                {{ error.message }}
+            </div>
+        {%- endfor -%}
+
+        {% if form.parent %}</span>{% else %}</div>{% endif %}
+    {%- endif %}
+{%- endblock form_errors %}
+
+{% block form_widget_simple -%}
+    {% if type is not defined or type not in ['file', 'hidden'] %}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) -%}
+    {% endif %}
+    {% if (not compound or force_error|default(false)) and not valid %}
+        {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control-warning')|trim}) -%}
+    {% endif %}
+    {{- parent() -}}
+{%- endblock form_widget_simple %}
+
+{% block form_row -%}
+    <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-warning{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}

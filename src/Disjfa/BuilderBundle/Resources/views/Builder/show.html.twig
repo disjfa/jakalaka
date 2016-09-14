@@ -1,0 +1,12 @@
+{% extends ':glynn-admin:base.html.twig' %}
+
+{% block title %}
+    {{ builder.name }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ builder.name }}</h1>
+
+    <builder builder-id="{{ builder.id }}"></builder>
+{% endblock %}
+

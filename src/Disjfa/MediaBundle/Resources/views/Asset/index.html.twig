@@ -1,0 +1,64 @@
+{% extends ":glynn-admin:base.html.twig" %}
+
+{% block title %}
+    Assets - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Assets</h1>
+    <div class="row">
+        <div class="col-xs-12">
+            <a href="{{ path('disjfa_media_asset_create') }}" class="btn btn-primary">
+                Add new
+            </a>
+            <a href="{{ path('disjfa_media_asset_import') }}" class="btn btn-primary">
+                Import assets
+            </a>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="hidden-lg-up col-xs-12 bg-primary text-xs-right">
+            <a href="#side-menu" data-toggle="collapse" class="btn btn-default bg-primary">
+                <i class="fa fa-life-ring"></i>
+                Show menu
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 bg-info navbar-toggleable-md collapse p-y-1" id="side-menu">
+            <h3>Assets</h3>
+            <p>Here we can add and view assets.</p>
+        </div>
+        <div class="col-lg-9">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Ext</th>
+                        <th>Size</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for asset in assets %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('disjfa_media_asset_show', {'asset': asset.id}) }}">
+                                    {{ asset.name }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ asset.extension }}
+                            </td>
+                            <td>
+                                {{ asset.size }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

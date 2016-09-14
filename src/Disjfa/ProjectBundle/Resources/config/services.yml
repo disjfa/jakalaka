@@ -1,0 +1,8 @@
+services:
+  disjfa_project.project_menu_listener:
+    class: Disjfa\ProjectBundle\GlynnAdminMenu\ProjectMenuListener
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@security.token_storage'
+    tags:
+      - { name: 'kernel.event_listener', event: 'glynn_admin.menu_configure', method: 'onMenuConfigure' }

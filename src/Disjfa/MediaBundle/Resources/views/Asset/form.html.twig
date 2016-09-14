@@ -1,0 +1,12 @@
+{% extends ':glynn-admin:base.html.twig' %}
+
+{% block title %}
+    Asset form - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <button type="submit">save</button>
+    {{ form_end(form) }}
+{% endblock %}

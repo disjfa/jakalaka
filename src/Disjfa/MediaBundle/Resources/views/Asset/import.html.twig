@@ -1,0 +1,58 @@
+{% extends ':glynn-admin:base.html.twig' %}
+
+{% block title %}
+    Import assets - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Import assets</h1>
+
+
+    <nav class="breadcrumb">
+        {% for item in crum %}
+            {% if loop.last %}
+                <span class="breadcrumb-item active">
+                    <i class="fa fa-folder"></i>
+                    {{ item.filename }}
+                </span>
+            {% else %}
+                <a href="{{ path('disjfa_media_asset_import', {'folder': item.realPath}) }}" class="breadcrumb-item">
+                    <i class="fa fa-folder"></i>
+                    {{ item.filename }}
+                </a>
+            {% endif %}
+
+        {% endfor %}
+    </nav>
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        <button type="submit" class="btn bg-primary">
+            Import this folder
+        </button>
+    </div>
+    {{ form_end(form) }}
+    <div class="list-group">
+        {% for directory in directories %}
+            <a href="{{ path('disjfa_media_asset_import', {'folder': directory.realPath}) }}" class="list-group-item">
+                {% if directory.dir %}
+                    <i class="fa fa-folder"></i>
+                {% else %}
+                    <i class="fa fa-file"></i>
+                {% endif %}
+                {{ directory.filename }}
+            </a>
+        {% endfor %}
+        {% for file in files %}
+            <a href="#" class="list-group-item">
+                {% if file.dir %}
+                    <i class="fa fa-folder"></i>
+                {% else %}
+                    <i class="fa fa-file-o"></i>
+                {% endif %}
+                {{ file.filename }}
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}
+

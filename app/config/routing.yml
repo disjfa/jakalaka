@@ -1,0 +1,27 @@
+Disjfa_media:
+    resource: "@DisjfaMediaBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+Disjfa_project:
+    resource: "@DisjfaProjectBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+Disjfa_builder:
+    resource: "@DisjfaBuilderBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+glyynn_admin:
+    resource: "@GlyynnAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

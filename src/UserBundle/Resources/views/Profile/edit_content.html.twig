@@ -1,0 +1,18 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<h1>Edit profile</h1>
+<div class="row">
+    <div class="col-sm-2 col-xs-12">
+        <img src="{{ gravatar(app.user.email, 200) }}" alt="Profile image" class="img-circle img-fluid ">
+    </div>
+    <div class="col-sm-10 col-xs-12">
+        {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+        {{ form_widget(form) }}
+        <div>
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-pencil"></i>
+                {{ 'profile.edit.submit'|trans }}
+            </button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

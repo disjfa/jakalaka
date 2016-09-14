@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Glynn admin{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
+
+    <link rel="stylesheet" href="{{ asset('glynn-admin/css/glynn-admin.css') }}">
+</head>
+<body>
+<div class="page-main-bg container bg-main">
+    <div class="row">
+        <div class="col-xs-12 page-logo">
+            <div>
+                <img src="{{ asset('glynn-admin/img/barista-icons_coffea-arabica.svg') }}" alt="Glynn admin" title="Glynn admin">
+            </div>
+            <h2 class="text-xs-center">
+                Glynn admin
+            </h2>
+        </div>
+    </div>
+    <br>
+
+    {% block body %}
+        {% endblock body %}
+    </div>
+
+    {% block javascripts %}
+        <script src="{{ asset('glynn-admin/js/glynn-admin.js') }}"></script>
+    {% endblock %}
+</div>
+</body>
+</html>

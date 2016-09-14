@@ -1,0 +1,14 @@
+{% extends ':glynn-admin:base.html.twig' %}
+
+{% block title %}
+    Create buidler - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+
+    {{ form_rest(form) }}
+    <button type="submit" class="btn btn-primary">save</button>
+    {{ form_end(form) }}
+{% endblock %}
+
