@@ -30,7 +30,9 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "ornicar/gravatar-bundle": "^1.1"
+        "ornicar/gravatar-bundle": "^1.1",
+        "intervention/image": "^2.3",
+        "friendsofsymfony/jsrouting-bundle": "^1.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

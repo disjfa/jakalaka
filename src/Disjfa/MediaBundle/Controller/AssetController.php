@@ -6,6 +6,8 @@ use DateTime;
 use Disjfa\MediaBundle\Entity\Asset;
 use Disjfa\MediaBundle\Form\Type\AssetType;
 use Disjfa\MediaBundle\Form\Type\ImportAssetType;
+use Intervention\Image\Image;
+use Intervention\Image\ImageManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Filesystem\Filesystem;
@@ -15,6 +17,8 @@ use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * @Route("/media")
@@ -53,7 +57,7 @@ class AssetController extends Controller
         $form = $this->createForm(ImportAssetType::class);
         $form->get('folder')->setData($currentFolder);
         $form->handleRequest($request);
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $importFolder = $form->get('folder')->getData();
             foreach ($files->files()->in($importFolder) as $file) {
                 $asset = new Asset($this->getUser());
@@ -70,7 +74,7 @@ class AssetController extends Controller
         $crum = [];
         $folderName = $currentFolder;
 
-        while(trim($folderName, '/') !== '') {
+        while (trim($folderName, '/') !== '') {
             $folder = new File($folderName, false);
             $crum[] = $folder;
 
@@ -90,7 +94,8 @@ class AssetController extends Controller
      * @param Asset $asset
      * @param File $file
      */
-    private function updateAssetWithFile(Asset $asset, File $file) {
+    private function updateAssetWithFile(Asset $asset, File $file)
+    {
         $asset->setMimeType($file->getMimeType());
         $asset->setSize($file->getSize());
         $asset->setPath($file->getRealPath());
@@ -135,6 +140,71 @@ class AssetController extends Controller
         return $this->render('DisjfaMediaBundle:Asset:form.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/{asset}/preview", name="disjfa_media_asset_preview")
+     */
+    public function previewAction(Asset $asset, Request $request)
+    {
+        if (false === $asset->isImage()) {
+            // todo
+            exit;
+        }
+
+        $fileName = $this->getParameter('disjfa_media.assets_folder') . '/cache/' . $asset->getId() . '/' . $asset->getId() . '.' . $asset->getExtension();
+        try {
+            $cacheFile = new File($fileName);
+            $eTag = md5_file($fileName);
+
+            if (in_array($eTag, $request->getETags()) || $request->headers->get('If-Modified-Since') === gmdate("D, d M Y H:i:s", $cacheFile->getMTime()) . " GMT") {
+                $response = new Response();
+                $response->headers->set("Content-Type", $cacheFile->getMimeType());
+                $response->headers->set("Last-Modified", gmdate("D, d M Y H:i:s", $cacheFile->getMTime()) . " GMT");
+                $response->headers->set("ETag", $eTag);
+                $response->setPublic();
+                $response->setStatusCode(304);
+
+                return $response;
+            }
+        } catch (FileNotFoundException $e) {
+            // no asset found. Go on, create one.
+        }
+
+        if (!is_dir(dirname($fileName))) {
+            mkdir(dirname($fileName), 0755, true);
+        }
+
+        try {
+            $file = new File($asset->getPath());
+        } catch (FileNotFoundException $e) {
+            return $this->render('DisjfaMediaBundle:Asset:asset_not_found.html.twig', [
+                'asset' => $asset,
+            ]);
+        }
+
+        $manager = new ImageManager(array('driver' => 'imagick'));
+        $image = $manager->make($asset->getPath());
+        $image->fit(800, 450);
+        $image->save($fileName);
+
+        $cacheFile = new File($fileName);
+        $eTag = md5_file($fileName);
+
+        $streamResponse = new StreamedResponse();
+        $streamResponse->headers->set("Content-Type", $cacheFile->getMimeType());
+        $streamResponse->headers->set("Content-Length", $cacheFile->getSize());
+        $streamResponse->headers->set("ETag", $eTag);
+        $streamResponse->headers->set("Last-Modified", gmdate("D, d M Y H:i:s", $cacheFile->getMTime()) . " GMT");
+
+        $streamResponse->setCallback(function () use ($fileName) {
+            readfile($fileName);
+        });
+
+        return $streamResponse;
+
+
+        return new BinaryFileResponse($cacheFile);
     }
 
     /**

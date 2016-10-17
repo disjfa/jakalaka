@@ -5,8 +5,28 @@
 {% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_rest(form) }}
-    <button type="submit">save</button>
-    {{ form_end(form) }}
+    <h1>Assets</h1>
+    <div class="row">
+        <div class="hidden-lg-up col-xs-12 bg-primary text-xs-right">
+            <a href="#side-menu" data-toggle="collapse" class="btn btn-default bg-primary">
+                <i class="fa fa-life-ring"></i>
+                Show menu
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 bg-info navbar-toggleable-md collapse p-y-1" id="side-menu">
+            <h3>Assets</h3>
+            <p>Here we can add an asset.</p>
+        </div>
+        <div class="col-lg-9">
+            {{ form_start(form) }}
+            {{ form_rest(form) }}
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-floppy-o"></i>
+                save
+            </button>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

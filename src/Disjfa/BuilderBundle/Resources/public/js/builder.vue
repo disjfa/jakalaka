@@ -1,12 +1,14 @@
 <template>
-    <div>Hello world</div>
+    <div>
+        {{ builderId }}
+    </div>
 </template>
-
 <script>
-    module.exports = {
+    export default{
+        props: ['builderId'],
         data () {
             return {
-                msg: "Hello world"
+
             }
         }
     }

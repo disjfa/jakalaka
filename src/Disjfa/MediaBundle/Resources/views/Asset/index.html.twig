@@ -31,33 +31,34 @@
             <p>Here we can add and view assets.</p>
         </div>
         <div class="col-lg-9">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Ext</th>
-                        <th>Size</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for asset in assets %}
-                        <tr>
-                            <td>
-                                <a href="{{ path('disjfa_media_asset_show', {'asset': asset.id}) }}">
+            <div class="row">
+                {% for asset in assets %}
+                    <div class="col-sm-4">
+                        <a class="card" href="{{ path('disjfa_media_asset_show', {'asset': asset.id}) }}">
+                            {% if asset.image %}
+                                <img src="{{ path('disjfa_media_asset_preview', {'asset': asset.id}) }}" alt=""
+                                     class="card-img-top img-fluid">
+                            {% else %}
+                                <div class="text-xs-center p-y-2 bg-faded">
+                                    <i class="fa fa-file-o fa-3x"></i>
+                                </div>
+                            {% endif %}
+                            <div class="card-block">
+                                <h4 class="card-title">
                                     {{ asset.name }}
-                                </a>
-                            </td>
-                            <td>
-                                {{ asset.extension }}
-                            </td>
-                            <td>
-                                {{ asset.size }}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                                </h4>
+                                <p class="card-text">
+                                    {{ asset.extension }}
+                                    <br>
+                                    {{ asset.size }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                    {% if loop.index % 3 == 0 %}
+                        <div class="clearfix hidden-sm-down"></div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -166,6 +166,14 @@ class Asset
     }
 
     /**
+     * @return bool
+     */
+    public function isImage()
+    {
+        return in_array($this->extension, ['gif', 'jpg', 'jpeg', 'png'], true);
+    }
+
+    /**
      * @return string
      */
     public function getPath()

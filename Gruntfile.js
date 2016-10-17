@@ -1,4 +1,5 @@
 module.exports = function (grunt) {
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -31,7 +32,9 @@ module.exports = function (grunt) {
                             {
                                 presets: ['es2015']
                             }
-                        ]
+                        ],
+                        'vueify',
+                        'aliasify'
                     ],
                     browserifyOptions: {
                         debug: true
@@ -124,6 +127,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-sass-lint');
     grunt.loadNpmTasks('grunt-vueify');
+
 
     grunt.registerTask('default', ['clean', 'copy', 'jshint', 'browserify', 'sasslint', 'sass']);
     grunt.registerTask('watcher', ['default', 'watch']);

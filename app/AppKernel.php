@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
 
@@ -25,6 +26,7 @@ class AppKernel extends Kernel
             new Disjfa\BuilderBundle\DisjfaBuilderBundle(),
             new Disjfa\ProjectBundle\DisjfaProjectBundle(),
             new Disjfa\MediaBundle\DisjfaMediaBundle(),
+            new Disjfa\PictureBundle\DisjfaPictureBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

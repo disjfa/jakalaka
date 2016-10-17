@@ -1,0 +1,15 @@
+{% extends ":glynn-admin:base.html.twig" %}
+
+{% block title %}
+    Pictures - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Pictures</h1>
+    {% for picture in pictures %}
+        <a href="{{ path('disjfa_picture_picture_show', {'picture': picture.id}) }}">
+            {{ picture.name }}
+        </a>
+    {% endfor %}
+{% endblock %}
+

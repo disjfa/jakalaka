@@ -1,0 +1,14 @@
+{% extends ':glynn-admin:base.html.twig' %}
+
+{% block title %}
+    {{ picture.name }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ picture.name }}</h1>
+
+    <picture picture-id="{{ picture.id }}"></picture>
+
+    <img src="{{ path('disjfa_picture_picture_preview', {'picture': picture.id}) }}" alt="" class="img-fluid">
+{% endblock %}
+
