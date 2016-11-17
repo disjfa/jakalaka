@@ -48,16 +48,16 @@
         },
         data () {
             return {
-                picture: new Picture({})
+                picture: new Picture({}),
+                pictureStore: require('./store')
             }
         },
         mounted () {
             this.initData();
+
+            console.log(this.pictureStore);
         },
         methods: {
-            updateStyles(e, a) {
-                console.log(e, a);
-            },
             save() {
                 this
                         .$http

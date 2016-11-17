@@ -30,8 +30,10 @@ class AssetController extends Controller
      */
     public function indexAction()
     {
+        $assets = $this->getDoctrine()->getRepository(Asset::class)->findAll();
+
         return $this->render('DisjfaMediaBundle:Asset:index.html.twig', [
-            'assets' => $this->getDoctrine()->getRepository(Asset::class)->findAll(),
+            'assets' => $assets,
         ]);
     }
 
@@ -143,6 +145,16 @@ class AssetController extends Controller
     }
 
     /**
+     * @Route("/{asset}/show", name="disjfa_media_asset_show")
+     */
+    public function showAction(Asset $asset)
+    {
+        return $this->render('DisjfaMediaBundle:Asset:show.html.twig', [
+            'asset' => $asset,
+        ]);
+    }
+
+    /**
      * @Route("/{asset}/preview", name="disjfa_media_asset_preview")
      */
     public function previewAction(Asset $asset, Request $request)
@@ -202,15 +214,12 @@ class AssetController extends Controller
         });
 
         return $streamResponse;
-
-
-        return new BinaryFileResponse($cacheFile);
     }
 
     /**
-     * @Route("/{asset}", name="disjfa_media_asset_show")
+     * @Route("/{asset}/download", name="disjfa_media_asset_download")
      */
-    public function showAction(Asset $asset)
+    public function downloadAction(Asset $asset)
     {
         try {
             $file = new File($asset->getPath());

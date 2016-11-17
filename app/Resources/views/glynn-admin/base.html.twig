@@ -14,13 +14,13 @@
 <div class="page">
     <div class="page-sidebar">
         <div class="sidebar">
-            <button class="navbar-toggler pull-right hidden-lg-up pull-xs-right p-a-1" type="button"
+            <button class="navbar-toggler pull-right hidden-lg-up pull-xs-right py-1 px-1" type="button"
                     data-toggle="collapse" data-target="#main-menu">
                 &#9776;
             </button>
-            <div class="text-lg-center p-a-1">
+            <div class="text-lg-center py-1 px-1">
                 <a class="site-title" href="{{ path('glynn-admin-homepage') }}">
-                    <img src="{{ asset("/glynn-admin/img/barista-icons_coffea-arabica.svg") }}" alt="" title="">
+                    <img src="{{ asset("glynn-admin/img/barista-icons_coffea-arabica.svg") }}" alt="" title="">
                     <span class="hidden-lg-up">
                         Jakalaka
                     </span>
@@ -29,7 +29,7 @@
             <div class="collapse navbar-toggleable-md" id="main-menu">
                 {% if app.user %}
                     <div class="dropdown pull-right">
-                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn ">
+                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn text-white">
                             <i class="fa fa-chevron-down"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
@@ -45,7 +45,7 @@
                     <a class="sidebar-user" href="{{ path('fos_user_profile_show') }}">
                         <div class="media">
                             <div class="media-left">
-                                <img src="{{ gravatar(app.user.email) }}" class="img-circle img-fluid sidebar-user-img"
+                                <img src="{{ gravatar(app.user.email) }}" class="rounded img-fluid sidebar-user-img"
                                      alt="Profile image">
                             </div>
                             <div class="media-body">

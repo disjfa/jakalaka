@@ -19,3 +19,6 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     disjfa_media.assets_folder: '%kernel.root_dir%/../data/assets'
+
+    disjfa_mozaic.unsplash_application_id: ''
+    disjfa_mozaic.unsplash_secret: ''

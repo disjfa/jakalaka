@@ -1,0 +1,14 @@
+{% extends ':glynn-admin:base.html.twig' %}
+
+{% block title %}
+    Asset {{ asset.name }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ asset.name }}</h1>
+
+    {% if asset.image %}
+        <img src="{{ path('disjfa_media_asset_preview', {'asset': asset.id}) }}">
+    {% endif %}
+{% endblock %}
+

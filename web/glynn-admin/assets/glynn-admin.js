@@ -18,16 +18,20 @@ window.Tether = Tether;
 
 var Vue = require('vue');
 var VueResource = require('vue-resource');
+var Vuex = require('vuex');
 
 Vue.use(VueResource);
+Vue.use(Vuex);
 
 require('bootstrap');
 require('chart.js');
 
 new Vue({
     el: '#base',
+
     components: {
         'picture': require('../../bundles/disjfapicture/js/picture.vue'),
-        'builder': require('../../bundles/disjfabuilder/js/builder.vue')
+        'builder': require('../../bundles/disjfabuilder/js/builder.vue'),
+        'mozaic': require('../../bundles/disjfamozaic/mozaic.vue')
     }
 });

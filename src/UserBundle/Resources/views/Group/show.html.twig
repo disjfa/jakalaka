@@ -1,0 +1,31 @@
+{% extends 'glynn-admin/base.html.twig' %}
+
+{% block title %}
+    {{ group.name }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>
+        {{ group.name }}
+    </h1>
+    <a href="{{ path('disjfa_user_group_edit', {'group': group.id}) }}" class="btn btn-primary">
+        Edit group
+    </a>
+
+    <div class="list-group">
+        {% for user in group.users %}
+            <a href="{{ path('disjfa_user_user_show', {'user': user.id}) }}" class="list-group-item">
+                <h5 class="list-group-item-heading">
+                    <i class="fa fa-user"></i>
+                    {{ user.username }}
+                </h5>
+                <p class="list-group-item-text">
+                    {{ user.email }}
+                </p>
+            </a>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+

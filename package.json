@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "grunt watcher"
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,8 @@
     "glynn-admin": "^0.1.2",
     "jquery-ui": "^1.12.1",
     "vue": "^2.0.1",
-    "vue-resource": "^1.0.0"
+    "vue-resource": "^1.0.0",
+    "vuex": "^2.0.0"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.13.2",

@@ -1,3 +1,13 @@
+disjfa_mozaic:
+    resource: "@DisjfaMozaicBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+disjfa_puzzle:
+    resource: "@DisjfaPuzzleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 disjfa_picture:
     resource: "@DisjfaPictureBundle/Controller/"
     type:     annotation

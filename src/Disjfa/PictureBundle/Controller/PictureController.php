@@ -101,18 +101,12 @@ class PictureController extends Controller
                 $shape->opacity($styles['opacity'] * 100);
             }
 
-            $image->insert($shape, null, (int)$styles['left'] - $padding, (int)$styles['top'] - $padding);
+            $left = array_key_exists('left', $styles) ? (int)$styles['left'] : 0;
+            $top = array_key_exists('top', $styles) ? (int)$styles['top'] : 0;
+
+            $image->insert($shape, null, $left - $padding, $top - $padding);
             $shape->destroy();
         }
-
-//        $image->text('foo foofoo foo foo foofoo foo foofoo foo foo foofoo foo ', 200, 200, function(AbstractFont $font) {
-//            $font->file('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf');
-//            $font->size(35);
-//            $font->color('#fdf6e3');
-//            $font->align('left');
-//            $font->valign('center');
-//            $font->angle(0);
-//        });
 
         echo $image->response('jpg');
         exit;

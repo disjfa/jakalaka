@@ -8,6 +8,8 @@ imports:
     - { resource: "@DisjfaMediaBundle/Resources/config/services.yml" }
     - { resource: "@DisjfaBuilderBundle/Resources/config/services.yml" }
     - { resource: "@DisjfaPictureBundle/Resources/config/services.yml" }
+    - { resource: "@DisjfaPuzzleBundle/Resources/config/services.yml" }
+    - { resource: "@DisjfaMozaicBundle/Resources/config/services.yml" }
 
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -75,3 +77,5 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: UserBundle\Entity\User
+    group:
+        group_class: UserBundle\Entity\Group

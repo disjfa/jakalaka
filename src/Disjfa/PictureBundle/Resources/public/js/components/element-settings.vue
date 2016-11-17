@@ -13,8 +13,8 @@
             <input v-model="element.styles.blur" class="form-control" type="number">
         </div>
         <div class="form-group">
-            <label>Opacity</label>
-            <input v-model="element.styles.opacity" class="form-control" type="number">
+            <label>Opacity ({{ element.styles.opacity }}) </label>
+            <input v-model="element.styles.opacity" class="form-control" type="range" min="0" max="1" step="0.01">
         </div>
         <div class="form-group">
             <label>Width</label>

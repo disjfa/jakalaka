@@ -61,6 +61,12 @@ class Asset
     private $path;
 
     /**
+     * @var string
+     * @ORM\Column(name="type", type="string", nullable=true)
+     */
+    private $type;
+
+    /**
      * Asset constructor.
      * @param User $author
      */

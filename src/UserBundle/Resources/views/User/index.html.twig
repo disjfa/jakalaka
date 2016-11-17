@@ -1,0 +1,46 @@
+{% extends "glynn-admin/base.html.twig" %}
+
+{% block title %}
+    Users - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>
+        Users
+    </h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Enabled</th>
+            <th>Last login</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>
+                    <a href="{{ path('disjfa_user_user_show', {'user': user.id}) }}">
+                        {{ user.username }}
+                    </a>
+                </td>
+                <td>
+                    {{ user.email }}
+                </td>
+                <td>
+                    {{ user.enabled }}
+                </td>
+                <td>
+                    {% if user.lastLogin %}
+                        {{ user.lastLogin | date }}
+                    {% else %}
+                        <i class="fa fa-minus"></i>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

@@ -1,4 +1,5 @@
 {% extends ":glynn-admin:base.html.twig" %}
+
 {% block title %}
     Projects - {{ parent() }}
 {% endblock %}
@@ -9,7 +10,7 @@
     <ul>
         {% for project in projects %}
             <li>
-                <a href="{{ path('disjfa_project_project_create') }}">{{ project.name }}</a>
+                <a href="{{ path('disjfa_project_project_edit', {'project': project.id}) }}">{{ project.name }}</a>
             </li>
         {% endfor %}
     </ul>

@@ -4,7 +4,6 @@ export default class Element {
         this.name = data.name;
         this.type = data.type;
         this.styles = data.styles;
-
     }
 
     getPostData() {

@@ -27,6 +27,8 @@ class AppKernel extends Kernel
             new Disjfa\ProjectBundle\DisjfaProjectBundle(),
             new Disjfa\MediaBundle\DisjfaMediaBundle(),
             new Disjfa\PictureBundle\DisjfaPictureBundle(),
+            new Disjfa\PuzzleBundle\DisjfaPuzzleBundle(),
+            new Disjfa\MozaicBundle\DisjfaMozaicBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

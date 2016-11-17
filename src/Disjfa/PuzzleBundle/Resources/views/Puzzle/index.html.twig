@@ -1,0 +1,20 @@
+{% extends "glynn-admin/base.html.twig" %}
+
+{% block title %}
+    Puzzle - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    aaa
+    <hr>
+    <div style="position:relative">
+        {% for row in columns %}
+            {% for column in row %}
+                {% if column %}
+                    <img src="{{ column.image }}" alt="" style="position: absolute; left: {{ column.styles.left }}px; top: {{ column.styles.top }}px; width: {{ column.styles.width }}px; height: {{ column.styles.height }}px; ">
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
