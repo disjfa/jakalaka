@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\BuilderBundle\Form\Type;
 
 use Disjfa\BuilderBundle\Entity\Builder;
@@ -10,14 +12,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class BuilderType
- * @package Disjfa\BuilderBundle\Form\Type
+ * Class BuilderType.
  */
 class BuilderType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -30,8 +31,8 @@ class BuilderType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => Builder::class,
-        ));
+        ]);
     }
 }

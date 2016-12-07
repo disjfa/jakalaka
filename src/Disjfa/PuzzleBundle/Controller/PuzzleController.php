@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\PuzzleBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * @Route("/puzzle")
@@ -33,8 +35,8 @@ class PuzzleController extends Controller
         $blockWidth = floor($w / $colX);
         $blockHeight = floor($h / $colY);
 
-        for ($i = 0; $i < $colX; $i++) {
-            for ($j = 0; $j < $colY; $j++) {
+        for ($i = 0; $i < $colX; ++$i) {
+            for ($j = 0; $j < $colY; ++$j) {
                 if (isset($columns[$i][$j])) {
                     continue;
                 }
@@ -46,11 +48,11 @@ class PuzzleController extends Controller
                 $sizeY = $j + $sizeY > $colY ? $colY - $j : $sizeY;
                 $maxY = $sizeY;
 
-                for ($mx = $i; $mx < $i + $sizeX; $mx++) {
+                for ($mx = $i; $mx < $i + $sizeX; ++$mx) {
                     if (isset($columns[$mx])) {
                         $maxX = $mx - $i < $maxX ? $mx - $i + 1 : $maxX;
                     }
-                    for ($my = $j; $my < $j + $sizeY; $my++) {
+                    for ($my = $j; $my < $j + $sizeY; ++$my) {
                         if (isset($columns[$mx][$my])) {
                             $maxY = $my - $j < $maxY ? $my - $j + 1 : $maxY;
                         }
@@ -58,8 +60,8 @@ class PuzzleController extends Controller
                 }
                 $sizeX = $maxX;
                 $sizeY = $maxY;
-                for ($mx = $i; $mx < $i + $sizeX; $mx++) {
-                    for ($my = $j; $my < $j + $sizeY; $my++) {
+                for ($mx = $i; $mx < $i + $sizeX; ++$mx) {
+                    for ($my = $j; $my < $j + $sizeY; ++$my) {
                         $columns[$mx][$my] = false;
                     }
                 }
@@ -74,8 +76,8 @@ class PuzzleController extends Controller
                         $i * $realWidth,
                         $j * $realHeight,
                         $realWidth * $sizeX,
-                        $realHeight * $sizeY
-                    ])
+                        $realHeight * $sizeY,
+                    ]),
                 ];
 
                 $columns[$i][$j] = [

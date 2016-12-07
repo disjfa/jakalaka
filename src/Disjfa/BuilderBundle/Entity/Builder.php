@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Disjfa\BuilderBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -30,13 +33,14 @@ class Builder
     private $author;
 
     /**
-     * @var boolean
+     * @var bool
      * @ORM\Column(name="preferred", type="boolean", options={"default" : false})
      */
     private $preferred;
 
     /**
      * Builder constructor.
+     *
      * @param User $author
      */
     public function __construct(User $author)
@@ -77,7 +81,7 @@ class Builder
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPreferred()
     {
@@ -85,7 +89,7 @@ class Builder
     }
 
     /**
-     * @param boolean $preferred
+     * @param bool $preferred
      */
     public function setPreferred($preferred)
     {

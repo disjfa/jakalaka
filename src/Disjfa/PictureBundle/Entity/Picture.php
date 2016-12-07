@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\PictureBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 use UserBundle\Entity\User;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
@@ -53,6 +55,7 @@ class Picture implements JsonSerializable
 
     /**
      * Picture constructor.
+     *
      * @param User $author
      */
     public function __construct(User $author)
@@ -94,7 +97,7 @@ class Picture implements JsonSerializable
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getWidth()
     {
@@ -102,7 +105,7 @@ class Picture implements JsonSerializable
     }
 
     /**
-     * @param integer $width
+     * @param int $width
      */
     public function setWidth($width)
     {
@@ -110,7 +113,7 @@ class Picture implements JsonSerializable
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getHeight()
     {
@@ -118,7 +121,7 @@ class Picture implements JsonSerializable
     }
 
     /**
-     * @param integer $height
+     * @param int $height
      */
     public function setHeight($height)
     {
@@ -147,7 +150,7 @@ class Picture implements JsonSerializable
     public function setElements($elements)
     {
         foreach ($elements as $element) {
-            if(null === $element->getPicture()) {
+            if (null === $element->getPicture()) {
                 $element->setPicture($this);
             }
         }
@@ -155,18 +158,22 @@ class Picture implements JsonSerializable
     }
 
     /**
-     * Specify data which should be serialized to JSON
-     * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
+     * Specify data which should be serialized to JSON.
+     *
+     * @see http://php.net/manual/en/jsonserializable.jsonserialize.php
+     *
      * @return mixed data which can be serialized by <b>json_encode</b>,
-     * which is a value of any type other than a resource.
+     *               which is a value of any type other than a resource
+     *
      * @since 5.4.0
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         $elements = [];
         foreach ($this->elements as $element) {
             $elements[] = $element->jsonSerialize();
         }
+
         return [
             'id' => $this->id,
             'name' => $this->name,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GlyynnAdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -11,8 +13,7 @@ use Knp\Menu\MenuItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class MainBuilder
- * @package GlyynnAdminBundle\Menu
+ * Class MainBuilder.
  */
 class MainBuilder
 {
@@ -32,9 +33,10 @@ class MainBuilder
 
     /**
      * MainBuilder constructor.
+     *
      * @param ContainerInterface $container
-     * @param FactoryInterface $factory
-     * @param Matcher $matcher
+     * @param FactoryInterface   $factory
+     * @param Matcher            $matcher
      */
     public function __construct(ContainerInterface $container, FactoryInterface $factory, Matcher $matcher)
     {
@@ -52,7 +54,7 @@ class MainBuilder
     {
         $menu = $this->factory->createItem('root', [
             'childrenAttributes' => [
-                'class' => 'sidebar-menu'
+                'class' => 'sidebar-menu',
             ],
         ]);
 
@@ -74,14 +76,15 @@ class MainBuilder
 
     /**
      * @param MenuItem[] $children
-     * @param bool $hasCurrent
+     * @param bool       $hasCurrent
+     *
      * @return bool
      */
     public function setupMenuData(array $children, $hasCurrent = false)
     {
         $childIndex = 0;
         foreach ($children as $child) {
-            $childIndex++;
+            ++$childIndex;
             if (count($child->getChildren()) > 0) {
                 $itemId = sprintf('menu-%d-%d', $child->getLevel(), $childIndex + 1);
 
@@ -90,7 +93,7 @@ class MainBuilder
 
                 $child->setLinkAttribute('data-toggle', 'collapse');
 
-                if($this->matcher->isAncestor($child)) {
+                if ($this->matcher->isAncestor($child)) {
                     $child->setChildrenAttribute('class', 'sidebar-sub collapse in');
                     $child->setLinkAttribute('class', 'sidebar-link');
                 } else {

@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Disjfa\BuilderBundle\Entity;
 
 use UserBundle\Entity\User;
 
 /**
- * Class BuilderQuery
- * @package Disjfa\BuilderBundle\Entity
+ * Class BuilderQuery.
  */
 class BuilderQuery
 {
@@ -15,12 +17,13 @@ class BuilderQuery
     private $author;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $preferred;
 
     /**
      * BuilderQuery constructor.
+     *
      * @param User $author
      */
     public function __construct(User $author)
@@ -45,7 +48,7 @@ class BuilderQuery
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isPreferred()
     {
@@ -53,7 +56,7 @@ class BuilderQuery
     }
 
     /**
-     * @param boolean $preferred
+     * @param bool $preferred
      */
     public function setPreferred($preferred)
     {

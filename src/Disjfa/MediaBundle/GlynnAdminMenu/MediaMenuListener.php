@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\MediaBundle\GlynnAdminMenu;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -8,8 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use UserBundle\Entity\User;
 
 /**
- * Class MediaMenuListener
- * @package Disjfa\MediaBundle\GlynnAdminMenu
+ * Class MediaMenuListener.
  */
 class MediaMenuListener
 {
@@ -24,8 +25,9 @@ class MediaMenuListener
 
     /**
      * MediaMenuListener constructor.
+     *
      * @param EntityManagerInterface $entityManager
-     * @param TokenStorageInterface $token
+     * @param TokenStorageInterface  $token
      */
     public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $token)
     {
@@ -44,6 +46,5 @@ class MediaMenuListener
         $mediaMenu = $menu->addChild('Media', ['route' => 'disjfa_media_asset_index'])->setExtra('icon', 'fa-file-o');
         $mediaMenu->addChild('Assets', ['route' => 'disjfa_media_asset_index'])->setExtra('icon', 'fa-file-o');
         $mediaMenu->addChild('Add new', ['route' => 'disjfa_media_asset_create'])->setExtra('icon', 'fa-plus');
-
     }
 }

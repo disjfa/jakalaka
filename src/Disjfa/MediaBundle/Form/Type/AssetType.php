@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\MediaBundle\Form\Type;
 
 use Disjfa\MediaBundle\Entity\Asset;
@@ -10,19 +12,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class AssetType
- * @package Disjfa\MediaBundle\Form\Type
+ * Class AssetType.
  */
 class AssetType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
-
         ]);
 
         $builder->add('file', FileType::class, [
@@ -39,6 +39,4 @@ class AssetType extends AbstractType
             'data_class' => Asset::class,
         ]);
     }
-
-
 }

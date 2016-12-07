@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\PictureBundle\Controller\Api;
 
 use Disjfa\PictureBundle\Entity\Picture;
 use Disjfa\PictureBundle\Form\Type\PictureType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,21 +22,25 @@ class PictureController extends Controller
     /**
      * @Route("/{picture}", name="disjfa_picture_api_picture_get", options={"expose": true})
      * @Method("GET")
+     *
      * @param Picture $picture
+     *
      * @return Response
      */
     public function getAction(Picture $picture)
     {
         return new JsonResponse([
-            'picture' => $picture
+            'picture' => $picture,
         ]);
     }
 
     /**
      * @Route("/{picture}", name="disjfa_picture_api_picture_patch", options={"expose": true})
      * @Method("PATCH")
+     *
      * @param Picture $picture
      * @param Request $request
+     *
      * @return Response
      */
     public function patchAction(Picture $picture, Request $request)
@@ -51,17 +57,17 @@ class PictureController extends Controller
                 'message' => 'saved',
                 'picture' => $picture,
             ]);
-        } else {
-            return new JsonResponse([
+        }
+
+        return new JsonResponse([
                 'message' => 'not saved',
                 'errors' => $this->getErrorMessages($form),
             ], 400);
-        }
     }
 
     private function getErrorMessages(Form $form)
     {
-        $errors = array();
+        $errors = [];
 
         foreach ($form->getErrors() as $key => $error) {
             if ($form->isRoot()) {
@@ -72,12 +78,11 @@ class PictureController extends Controller
         }
 
         foreach ($form->all() as $child) {
-            if (!$child->isValid()) {
+            if ( ! $child->isValid()) {
                 $errors[$child->getName()] = $this->getErrorMessages($child);
             }
         }
 
         return $errors;
     }
-
 }

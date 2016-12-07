@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\ProjectBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -32,6 +34,7 @@ class Project
 
     /**
      * Builder constructor.
+     *
      * @param User $author
      */
     public function __construct(User $author)

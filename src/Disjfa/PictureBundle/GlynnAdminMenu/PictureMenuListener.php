@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\PictureBundle\GlynnAdminMenu;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,8 +22,9 @@ class PictureMenuListener
 
     /**
      * MediaMenuListener constructor.
+     *
      * @param EntityManagerInterface $entityManager
-     * @param TokenStorageInterface $token
+     * @param TokenStorageInterface  $token
      */
     public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $token)
     {
@@ -40,6 +43,5 @@ class PictureMenuListener
         $mediaMenu = $menu->addChild('Picture', ['route' => 'disjfa_picture_picture_index'])->setExtra('icon', 'fa-picture-o');
         $mediaMenu->addChild('Picture', ['route' => 'disjfa_picture_picture_index'])->setExtra('icon', 'fa-picture-o');
         $mediaMenu->addChild('Add new', ['route' => 'disjfa_picture_picture_create'])->setExtra('icon', 'fa-plus');
-
     }
 }

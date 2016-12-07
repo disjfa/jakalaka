@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\ProjectBundle\Controller;
 
 use Disjfa\ProjectBundle\Entity\Project;
 use Disjfa\ProjectBundle\Form\Type\ProjectType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,7 +30,7 @@ class ProjectController extends Controller
     public function indexAction()
     {
         return $this->render('DisjfaProjectBundle:Project:index.html.twig', [
-            'projects' => $this->getProjectRepository()->findAll()
+            'projects' => $this->getProjectRepository()->findAll(),
         ]);
     }
 
@@ -41,7 +43,7 @@ class ProjectController extends Controller
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();
@@ -56,8 +58,10 @@ class ProjectController extends Controller
 
     /**
      * @Route("/create/{project}/edit", name="disjfa_project_project_edit")
+     *
      * @param Request $request
      * @param Project $project
+     *
      * @return Response
      */
     public function editAction(Request $request, Project $project)
@@ -65,7 +69,7 @@ class ProjectController extends Controller
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
-        if($form->isValid()) {
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($project);
             $em->flush();

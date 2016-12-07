@@ -1,9 +1,11 @@
 <?php
+
+declare(strict_types=1);
+
 namespace GlyynnAdminBundle\Menu;
 
 /**
- * Class ConfigureMenuListener
- * @package GlyynnAdminBundle\Menu
+ * Class ConfigureMenuListener.
  */
 class ConfigureMenuListener
 {

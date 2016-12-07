@@ -1,20 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\PictureBundle\Controller;
 
 use Disjfa\PictureBundle\Entity\Picture;
 use Disjfa\PictureBundle\Form\Type\PictureType;
 use Imagick;
-use Intervention\Image\AbstractColor;
-use Intervention\Image\AbstractFont;
 use Intervention\Image\AbstractShape;
-use Intervention\Image\Gd\Shapes\RectangleShape;
-use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
-use Intervention\Image\Imagick\Color;
-use Intervention\Image\Imagick\Font;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,7 +31,9 @@ class PictureController extends Controller
 
     /**
      * @Route("/create", name="disjfa_picture_picture_create")
+     *
      * @param Request $request
+     *
      * @return Response
      */
     public function createAction(Request $request)
@@ -58,8 +56,10 @@ class PictureController extends Controller
 
     /**
      * @Route("/{picture}/edit", name="disjfa_picture_picture_edit")
+     *
      * @param Picture $picture
      * @param Request $request
+     *
      * @return Response
      */
     public function editAction(Picture $picture, Request $request)
@@ -84,7 +84,7 @@ class PictureController extends Controller
      */
     public function previewAction(Picture $picture)
     {
-        $manager = new ImageManager(array('driver' => 'imagick'));
+        $manager = new ImageManager(['driver' => 'imagick']);
         $image = $manager->canvas($picture->getWidth(), $picture->getHeight());
 
         foreach ($picture->getElements() as $element) {
@@ -101,8 +101,8 @@ class PictureController extends Controller
                 $shape->opacity($styles['opacity'] * 100);
             }
 
-            $left = array_key_exists('left', $styles) ? (int)$styles['left'] : 0;
-            $top = array_key_exists('top', $styles) ? (int)$styles['top'] : 0;
+            $left = array_key_exists('left', $styles) ? (int) $styles['left'] : 0;
+            $top = array_key_exists('top', $styles) ? (int) $styles['top'] : 0;
 
             $image->insert($shape, null, $left - $padding, $top - $padding);
             $shape->destroy();

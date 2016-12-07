@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GlyynnAdminBundle\Controller;
 
 use GlyynnAdminBundle\Dashboard\ConfigureDashboardEvent;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {

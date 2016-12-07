@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UserBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,6 +26,39 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/create", name="disjfa_user_user_create")
+     */
+    public function createAction(Request $request)
+    {
+        $user = $this->get('fos_user.user_manager')->createUser();
+
+        return $this->handleUserForm($user, $request);
+    }
+
+    /**
+     * @Route("/{user}", name="disjfa_user_user_show")
+     */
+    public function showAction(User $user)
+    {
+        return $this->render('UserBundle:User:show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
+     * @Route("/{user}/edit", name="disjfa_user_user_edit")
+     *
+     * @param User    $user
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function editAction(User $user, Request $request)
+    {
+        return $this->handleUserForm($user, $request);
+    }
+
     private function handleUserForm(User $user, Request $request)
     {
         $form = $this->createForm(UserType::class, $user);
@@ -41,36 +76,5 @@ class UserController extends Controller
         return $this->render('UserBundle:User:form.html.twig', [
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/create", name="disjfa_user_user_create")
-     */
-    public function createAction(Request $request)
-    {
-        $user = $this->get('fos_user.user_manager')->createUser();
-        return $this->handleUserForm($user, $request);
-    }
-
-    /**
-     * @Route("/{user}", name="disjfa_user_user_show")
-     */
-    public function showAction(User $user)
-    {
-        return $this->render('UserBundle:User:show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-
-    /**
-     * @Route("/{user}/edit", name="disjfa_user_user_edit")
-     * @param User $user
-     * @param Request $request
-     * @return Response
-     */
-    public function editAction(User $user, Request $request)
-    {
-        return $this->handleUserForm($user, $request);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GlyynnAdminBundle\Dashboard;
 
 use Doctrine\Common\Collections\ArrayCollection;

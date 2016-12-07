@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace UserBundle\Form\Type;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -13,14 +15,13 @@ use UserBundle\Entity\Group;
 use UserBundle\Entity\User;
 
 /**
- * Class UserType
- * @package UserBundle\Form\Type
+ * Class UserType.
  */
 class UserType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -54,10 +55,8 @@ class UserType extends AbstractType
                 ]),
                 new UniqueEntity([
                     'fields' => ['email'],
-                ])
+                ]),
             ],
         ]);
     }
-
-
 }

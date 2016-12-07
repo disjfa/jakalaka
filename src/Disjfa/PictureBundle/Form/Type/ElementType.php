@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\PictureBundle\Form\Type;
 
 use Disjfa\PictureBundle\Entity\Element;
@@ -21,9 +23,7 @@ class ElementType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Element::class
+            'data_class' => Element::class,
         ]);
     }
-
-
 }

@@ -1,15 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\MediaBundle\Controller;
 
 use DateTime;
 use Disjfa\MediaBundle\Entity\Asset;
 use Disjfa\MediaBundle\Form\Type\AssetType;
 use Disjfa\MediaBundle\Form\Type\ImportAssetType;
-use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -93,22 +94,6 @@ class AssetController extends Controller
     }
 
     /**
-     * @param Asset $asset
-     * @param File $file
-     */
-    private function updateAssetWithFile(Asset $asset, File $file)
-    {
-        $asset->setMimeType($file->getMimeType());
-        $asset->setSize($file->getSize());
-        $asset->setPath($file->getRealPath());
-        $asset->setExtension($file->getExtension());
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($asset);
-        $em->flush();
-    }
-
-    /**
      * @Route("/create", name="disjfa_media_asset_create")
      */
     public function createAction(Request $request)
@@ -169,11 +154,11 @@ class AssetController extends Controller
             $cacheFile = new File($fileName);
             $eTag = md5_file($fileName);
 
-            if (in_array($eTag, $request->getETags()) || $request->headers->get('If-Modified-Since') === gmdate("D, d M Y H:i:s", $cacheFile->getMTime()) . " GMT") {
+            if (in_array($eTag, $request->getETags()) || $request->headers->get('If-Modified-Since') === gmdate('D, d M Y H:i:s', $cacheFile->getMTime()) . ' GMT') {
                 $response = new Response();
-                $response->headers->set("Content-Type", $cacheFile->getMimeType());
-                $response->headers->set("Last-Modified", gmdate("D, d M Y H:i:s", $cacheFile->getMTime()) . " GMT");
-                $response->headers->set("ETag", $eTag);
+                $response->headers->set('Content-Type', $cacheFile->getMimeType());
+                $response->headers->set('Last-Modified', gmdate('D, d M Y H:i:s', $cacheFile->getMTime()) . ' GMT');
+                $response->headers->set('ETag', $eTag);
                 $response->setPublic();
                 $response->setStatusCode(304);
 
@@ -183,7 +168,7 @@ class AssetController extends Controller
             // no asset found. Go on, create one.
         }
 
-        if (!is_dir(dirname($fileName))) {
+        if ( ! is_dir(dirname($fileName))) {
             mkdir(dirname($fileName), 0755, true);
         }
 
@@ -195,7 +180,7 @@ class AssetController extends Controller
             ]);
         }
 
-        $manager = new ImageManager(array('driver' => 'imagick'));
+        $manager = new ImageManager(['driver' => 'imagick']);
         $image = $manager->make($asset->getPath());
         $image->fit(800, 450);
         $image->save($fileName);
@@ -204,10 +189,10 @@ class AssetController extends Controller
         $eTag = md5_file($fileName);
 
         $streamResponse = new StreamedResponse();
-        $streamResponse->headers->set("Content-Type", $cacheFile->getMimeType());
-        $streamResponse->headers->set("Content-Length", $cacheFile->getSize());
-        $streamResponse->headers->set("ETag", $eTag);
-        $streamResponse->headers->set("Last-Modified", gmdate("D, d M Y H:i:s", $cacheFile->getMTime()) . " GMT");
+        $streamResponse->headers->set('Content-Type', $cacheFile->getMimeType());
+        $streamResponse->headers->set('Content-Length', $cacheFile->getSize());
+        $streamResponse->headers->set('ETag', $eTag);
+        $streamResponse->headers->set('Last-Modified', gmdate('D, d M Y H:i:s', $cacheFile->getMTime()) . ' GMT');
 
         $streamResponse->setCallback(function () use ($fileName) {
             readfile($fileName);
@@ -230,5 +215,21 @@ class AssetController extends Controller
         }
 
         return new BinaryFileResponse($file);
+    }
+
+    /**
+     * @param Asset $asset
+     * @param File  $file
+     */
+    private function updateAssetWithFile(Asset $asset, File $file)
+    {
+        $asset->setMimeType($file->getMimeType());
+        $asset->setSize($file->getSize());
+        $asset->setPath($file->getRealPath());
+        $asset->setExtension($file->getExtension());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($asset);
+        $em->flush();
     }
 }

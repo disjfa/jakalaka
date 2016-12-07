@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\BuilderBundle\GlynnAdminMenu;
 
 use Disjfa\BuilderBundle\Entity\Builder;
@@ -11,8 +13,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use UserBundle\Entity\User;
 
 /**
- * Class BuilderMenuListener
- * @package Disjfa\BuilderBundle\GlynnAdminMenu
+ * Class BuilderMenuListener.
  */
 class BuilderMenuListener
 {
@@ -27,8 +28,9 @@ class BuilderMenuListener
 
     /**
      * BuilderMenuListener constructor.
+     *
      * @param EntityManagerInterface $entityManager
-     * @param TokenStorageInterface $token
+     * @param TokenStorageInterface  $token
      */
     public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $token)
     {
@@ -60,11 +62,10 @@ class BuilderMenuListener
             foreach ($builders as $builder) {
                 $builderMenu->addChild($builder->getName(), [
                     'route' => 'disjfa_builder_builder_show',
-                    'routeParameters' => ['builder' => $builder->getId()]
+                    'routeParameters' => ['builder' => $builder->getId()],
                 ])->setExtra('icon', 'fa fa-circle');
             }
         }
         $builderMenu->addChild('Add new', ['route' => 'disjfa_builder_builder_create'])->setExtra('icon', 'fa-plus');
-
     }
 }

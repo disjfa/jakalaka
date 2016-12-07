@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\PictureBundle\Entity;
 
-use JsonSerializable;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 
 /**
  * @ORM\Entity()
@@ -115,7 +117,7 @@ class Element implements JsonSerializable
         $this->picture = $picture;
     }
 
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return [
             'id' => $this->id,

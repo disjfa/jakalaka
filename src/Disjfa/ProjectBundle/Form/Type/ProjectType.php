@@ -1,6 +1,8 @@
 <?php
-namespace Disjfa\ProjectBundle\Form\Type;
 
+declare(strict_types=1);
+
+namespace Disjfa\ProjectBundle\Form\Type;
 
 use Disjfa\ProjectBundle\Entity\Project;
 use Symfony\Component\Form\AbstractType;
@@ -9,14 +11,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class ProjectType
- * @package Disjfa\ProjectBundle\Form\Type
+ * Class ProjectType.
  */
 class ProjectType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -29,9 +30,7 @@ class ProjectType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Project::class
+            'data_class' => Project::class,
         ]);
     }
-
-
 }

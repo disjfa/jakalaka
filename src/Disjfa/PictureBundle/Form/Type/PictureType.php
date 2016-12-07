@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Disjfa\PictureBundle\Form\Type;
 
 use Disjfa\PictureBundle\Entity\Picture;
@@ -12,14 +15,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 
 /**
- * Class PictureType
- * @package Disjfa\PictureBundle\Form\Type
+ * Class PictureType.
  */
 class PictureType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

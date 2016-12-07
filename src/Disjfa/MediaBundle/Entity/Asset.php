@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Disjfa\MediaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -43,7 +45,7 @@ class Asset
     private $mimeType;
 
     /**
-     * @var integer
+     * @var int
      * @ORM\Column(name="size", type="integer")
      */
     private $size;
@@ -68,6 +70,7 @@ class Asset
 
     /**
      * Asset constructor.
+     *
      * @param User $author
      */
     public function __construct(User $author)
